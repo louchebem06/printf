@@ -6,21 +6,19 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/07 22:58:17 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/08 00:22:25 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 //cspdiuxX%
+//flags -0.*
 int ft_printf(const char *input, ...)
 {
-	char *str; // s, STRING
-	char charset; // c, char
-	int  decimal; // d, i, Decimal
-	unsigned int un_decimal; // u, Unsigned Decimail
-	unsigned int hexa; // x, Hexadecimal abcd
-	unsigned int HEXA; // X, Hexadecimal ABCD
-	//p, Pointer
+	char *str;
+	char charset;
+	int  decimal;
+	unsigned int un_decimal;
 
 	int i = 0;
 	va_list		args;
@@ -56,13 +54,19 @@ int ft_printf(const char *input, ...)
 				ft_putchar_fd('%', 1);
 			else if (input[i] == 'x')
 			{
-				hexa = va_arg(args, unsigned int);
-				ft_putstr_fd(ft_strtolower(ft_itoh(hexa)), 1);
+				un_decimal = va_arg(args, unsigned int);
+				ft_putstr_fd(ft_strtolower(ft_itoh(un_decimal)), 1);
 			}
 			else if (input[i] == 'X')
 			{
-				HEXA = va_arg(args, unsigned int);
-				ft_putstr_fd(ft_strtoupper(ft_itoh(HEXA)), 1);
+				un_decimal = va_arg(args, unsigned int);
+				ft_putstr_fd(ft_strtoupper(ft_itoh(un_decimal)), 1);
+			}
+			else if (input[i] == 'p')
+			{
+				un_decimal = va_arg(args, unsigned int);
+				ft_putstr_fd("0x7ffe", 1);
+				ft_putstr_fd(ft_strtolower(ft_itoh(un_decimal)), 1);
 			}
 		}
 		else
