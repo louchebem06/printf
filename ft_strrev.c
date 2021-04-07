@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/07 11:19:38 by bledda           ###   ########.fr       */
+/*   Created: 2021/04/07 20:23:32 by bledda            #+#    #+#             */
+/*   Updated: 2021/04/07 22:58:11 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "ft_printf.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdarg.h>
-# include "libft/libft.h"
+void ft_strrev(char *str)
+{
+	char c;
+	int i;
+	int j;
 
-int	ft_printf(const char *, ...);
-
-#endif
+	i = 0;
+	j = ft_strlen(str) - 1;
+	while (i < j)
+	{
+	    c = str[i];
+		str[i] = str[j];
+		str[j] = c;
+		i++;
+		j--;
+	}
+}

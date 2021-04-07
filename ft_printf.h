@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 11:02:55 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/07 22:57:55 by bledda           ###   ########.fr       */
+/*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
+/*   Updated: 2021/04/07 22:57:31 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int main(void)
-{
-	/*char str[] = "je suis une string";
-	unsigned int plus = 500;
-	int neg = -42;*/
-	unsigned int coucou = 'j';
-	unsigned int coucou2 = 'J';
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdarg.h>
+# include "libft/libft.h"
 
-	printf("%x %X", coucou, coucou2);
-	printf("\n");
-	ft_printf("%x %X", coucou, coucou2);
-	printf("\n");
-	return (0);
-}
+int	ft_printf(const char *, ...);
+char *ft_itoh(unsigned int nb);
+void ft_strrev(char *str);
+char	*ft_strtoupper(char *str);
+char	*ft_strtolower(char *str);
+
+#endif
