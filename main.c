@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 21:08:31 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/12 02:01:04 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/12 18:59:09 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 
 int	main(void)
 {
-	printf("%0*d\n", 10, 10);
-	ft_printf("%0*d\n", 10, 10);
-	printf("%0*d\n", -10, -10);
-	ft_printf("%0*d\n", -10, -10);
-	printf("%0*d\n", 54, 10);
-	ft_printf("%0*d\n", 54, 10);
-	printf("%d\n", 15);
-	ft_printf("%d\n", 15);
+	printf("%x\n", 'j');
+	ft_printf("%x\n", 'j');
+	printf("%X\n", 'J');
+	ft_printf("%X\n", 'J');
 	return (0);
 }

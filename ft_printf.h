@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/09 13:44:09 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/12 18:51:53 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 
 int		ft_printf(const char *input, ...);
-char	*ft_itoh(unsigned int nb);
+char	*ft_itoh(unsigned long long nb);
 void	ft_strrev(char *str);
 char	*ft_strtoupper(char *str);
 char	*ft_strtolower(char *str);

@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/12 02:02:23 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/12 19:00:59 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int ft_printf(const char *input, ...)
 	char *str;
 	char charset;
 	int  decimal;
-	unsigned int un_decimal;
+	unsigned long long un_decimal;
 	char flags[10];
 	size_t f;
 	int i;
@@ -89,20 +89,33 @@ int ft_printf(const char *input, ...)
 			}
 			else if (input[i] == '%')
 				ft_putchar_fd('%', 1);
-			else if (input[i] == 'x')
+			else if (input[i] == 'x' || input[i] == 'X')
 			{
-				un_decimal = va_arg(args, unsigned int);
-				ft_putstr_fd(ft_strtolower(ft_itoh(un_decimal)), 1);
-			}
-			else if (input[i] == 'X')
-			{
-				un_decimal = va_arg(args, unsigned int);
-				ft_putstr_fd(ft_strtoupper(ft_itoh(un_decimal)), 1);
+				if (ft_strncmp(flags, "0*", 2) == 0)
+				{
+					start = va_arg(args, int);
+					un_decimal = va_arg(args, unsigned int);
+					if (start >= 0)
+					{
+						tmp = ft_calloc(sizeof(char), start + 1);
+						tmp = ft_memset(tmp, '0', start - 1);
+						if (ft_strlen(tmp) > ft_strlen(ft_itoa(un_decimal)))
+							ft_putstr_fd(tmp, 1);
+						free(tmp);
+						tmp = 0;
+					}
+				}
+				else
+					un_decimal = va_arg(args, unsigned int);
+				if (input[i] == 'x')
+					ft_putstr_fd(ft_strtolower(ft_itoh(un_decimal)), 1);
+				else
+					ft_putstr_fd(ft_strtoupper(ft_itoh(un_decimal)), 1);
 			}
 			else if (input[i] == 'p')
 			{
-				un_decimal = va_arg(args, unsigned int);
-				ft_putstr_fd("0x7ffe", 1);
+				un_decimal = va_arg(args, unsigned long long);
+				ft_putstr_fd("0x", 1);
 				ft_putstr_fd(ft_strtolower(ft_itoh(un_decimal)), 1);
 			}
 		}
