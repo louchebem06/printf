@@ -6,15 +6,15 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 22:12:24 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/07 22:58:05 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/09 13:46:25 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *ft_strtolower(char *str)
+char	*ft_strtolower(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != 0)
