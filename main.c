@@ -6,19 +6,23 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 21:08:31 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/13 12:34:14 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/13 18:37:22 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+//gcc *.c *.h libft/*.c && rm ft_printf.h.gch && ./a.out
 int	main(void)
 {
 	char *pointer;
 
 	pointer = 0;
-	printf("%0*d\n", 11, 150);
-	ft_printf("%0*d\n", 11, 150);
+	printf("%0*d\n", 11, -150);
+	ft_printf("%0*d\n", 11, -150);
+	printf("%0*d\n", 1, -150);
+	ft_printf("%0*d\n", 1, -150);
+	printf("%*d\n", 1, 150);
+	ft_printf("%*d\n", 1, 150);
 	printf("%*d\n", 11, 150);
 	ft_printf("%*d\n", 11, 150);
 	printf("%*i\n", 10, 12);
@@ -45,11 +49,21 @@ int	main(void)
 	ft_printf("%*c\n", 10, 'S');
 	printf("%*%\n", 10);
 	ft_printf("%*%\n", 10);
+	printf("%%\n");
+	ft_printf("%%\n");
+	printf("%c\n", 'S');
+	ft_printf("%c\n", 'S');
 	printf("%*s\n", 20, "Ouais ouais oauis");
 	ft_printf("%*s\n", 20, "Ouais ouais oauis");
 	printf("%*s\n", 10, "Ouais ouais oauis");
 	ft_printf("%*s\n", 10, "Ouais ouais oauis");
 	printf("%s\n", "Ouais ouais oauis");
 	ft_printf("%s\n", "Ouais ouais oauis");
+	//printf("%-10.5s\n", "Coucoucou");
+	//ft_printf("%s\n", "Ouais ouais oauis");
+	int i = printf("%10.5s\n", "Coucoucou");
+	//printf("%d\n", i);
+	i = ft_printf("%10.5s\n", "Coucoucou");
+	//printf("%d\n", i);*/
 	return (0);
 }

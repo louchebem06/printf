@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/12 23:04:10 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/13 18:52:02 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@ char	*ft_itoh(unsigned long long nb);
 void	ft_strrev(char *str);
 char	*ft_strtoupper(char *str);
 char	*ft_strtolower(char *str);
+void	ft_before_data(int start, char *str, char charset, unsigned int *cmp);
+int		ft_isconvert(char charset);
+char	*ft_strreplace(char *mainstr, char charset, char *replace);
+int		ft_strchrintab(char *str, char a, char b);
+void 	ft_putnstr(char *str, int n);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/07 23:26:35 by bledda           ###   ########.fr        #
+#    Updated: 2021/04/13 15:02:40 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ SRCS	= ft_printf.c \
 			ft_itoh.c \
 			ft_strrev.c \
 			ft_strtolower.c \
-			ft_strtoupper.c
+			ft_strtoupper.c \
+			ft_before_data.c \
+			ft_isconvert.c
 OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS  = -Wall -Wextra -Werror
