@@ -6,18 +6,18 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:50:04 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/13 19:05:35 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/13 19:24:12 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void ft_putnstr(char *str, int n)
 {
 	int i;
 
 	i = 0;
-	while (str[i] != 0 || i < n)
+	while (str[i] != 0 && i < n)
 	{
 		ft_putchar_fd(str[i], 1);
 		i++;

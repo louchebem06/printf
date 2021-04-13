@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/13 18:52:46 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/14 01:18:47 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int ft_printf(const char *input, ...)
 {
 	char *str;
-	unsigned long long decimal;
+	//unsigned long long decimal;
 	char *flags;
 	size_t f;
 	int i;
@@ -52,6 +52,7 @@ int ft_printf(const char *input, ...)
 
 			if (input[i] == 's')
 			{
+				/*SI YA DES FLAGS*/
 				if (ft_strlen(flags) > 0)
 				{
 					if (ft_strchr(flags, '*') != 0)
@@ -70,16 +71,67 @@ int ft_printf(const char *input, ...)
 					DATA AVANT 10. Place 10 espace
 					DATA APRES .5 Affiche que les 5 premier char ou jusqu'a '\0'
 					if -10. Les espace seront placer apres le texte*/
-					if (ft_strchr(flags, '.') != 0)
+
+					/*SI YA PAS DE . donc selement une etoile qui a etait Remplacer precedament*/
+					if (ft_strchr(flags, '.') == 0)
 					{
-						ft_before_data(start, str, ' ', &cmp);
-						cmp += ft_strlen(str);
-						ft_putstr_fd(str, 1);
+						if (ft_strchr(flags, '-') != 0)
+						{
+							start = ft_strchrintab(flags, '-', 's');
+							ft_putstr_fd(str, 1);
+							ft_before_data(start, ft_strlen(str), ' ', &cmp);
+							cmp += ft_strlen(str);
+						}
+						else
+						{
+							start = ft_atoi(flags);
+							ft_before_data(start, ft_strlen(str), ' ', &cmp);
+							cmp += ft_strlen(str);
+							ft_putstr_fd(str, 1);
+						}
 					}
 					else
 					{
-						if (end != -1)
+						end = ft_strchrintab(flags, '.', 'b');
+						if (ft_strchr(flags, '-') != 0)
+						{
+							/*SI YA UN - AU DEBUT*/
+							start = ft_strchrintab(flags, '-', '.');
+							if (start != -1)
+							{
+								ft_putnstr(str, end);
+								if (end != -1)
+									ft_before_data(start, end, ' ', &cmp);
+								else
+									ft_before_data(start, ft_strlen(str), ' ', &cmp);
+								if (ft_strlen(str) > (size_t)end)
+									cmp += end;
+								else
+									cmp += ft_strlen(str);
+							}
+						}
+						else
+						{
+							/*SI YA PAS DE -*/
+							start = ft_strchrintab(flags, 'a', '.');
+							if (start != -1)
+							{
+								if (end != -1)
+									ft_before_data(start, end, ' ', &cmp);
+								else if (end == -1 && start != -1)
+									ft_before_data(start, 0, ' ', &cmp);
+								else
+									ft_before_data(start, ft_strlen(str), ' ', &cmp);
+							}
+							if (end != -1)
+							{
+								if (ft_strlen(str) > (size_t)end)
+									cmp += end;
+								else
+									cmp += ft_strlen(str);
+							}
 							ft_putnstr(str, end);
+						}
 					}
 					start = -1;
 					end = -1;
@@ -91,7 +143,7 @@ int ft_printf(const char *input, ...)
 					ft_putstr_fd(str, 1);
 				}
 			}
-
+/*
 			else if (input[i] == 'c' || input[i] == '%')
 			{
 				if (!ft_strncmp(flags, "*", 1))
@@ -191,7 +243,7 @@ int ft_printf(const char *input, ...)
 					ft_putstr_fd(ft_strtolower(ft_itoh(decimal)), 1);
 					cmp += ft_strlen(ft_itoh(decimal));
 				}
-			}
+			}*/
 
 		}
 		else
@@ -201,6 +253,7 @@ int ft_printf(const char *input, ...)
 		}
 		i++;
 	}
+	free(flags);
 	va_end(args);
 	return (cmp);
 }
