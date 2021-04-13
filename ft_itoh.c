@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:01:58 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/12 18:54:18 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/13 12:11:40 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_itoh(unsigned long long nb)
 {
-	char			itoh[100];
-	int				i;
-	unsigned long long save_nb;
-	char			*r;
+	char				itoh[100];
+	int					i;
+	unsigned long long	save_nb;
+	char				*r;
 
 	i = 0;
 	while (nb != 0)
