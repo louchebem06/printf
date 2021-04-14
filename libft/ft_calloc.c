@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:08:22 by bledda            #+#    #+#             */
-/*   Updated: 2021/03/27 19:29:24 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/14 11:48:50 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void 	*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
-
+	
 	str = malloc(size * count);
 	if (str == 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/14 01:18:47 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/14 14:16:23 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int ft_printf(const char *input, ...)
 {
 	char *str;
-	//unsigned long long decimal;
+	unsigned long long decimal;
 	char *flags;
 	size_t f;
 	int i;
@@ -50,7 +50,51 @@ int ft_printf(const char *input, ...)
 				flags[f++] = input[i++];
 			f = 0;
 
-			if (input[i] == 's')
+			if (input[i] == 'c')
+			{
+				if (flags[0] == 0)
+				{
+					/*Pas de flags*/
+					decimal = va_arg(args, int);
+					ft_putchar_fd(decimal, 1);
+					cmp++;
+				}
+				else
+				{
+					if (ft_strchr(flags, '*') != 0)
+					{
+						start = va_arg(args, int);
+						flags = ft_strreplace(flags, '*', ft_itoa(start));
+					}
+					/*Avec Flags*/
+					if (ft_strchr(flags, '-') != 0)
+					{
+						/*Si ya un moin*/
+						decimal = va_arg(args, int);
+						ft_putchar_fd(decimal, 1);
+						cmp++;
+						//printf("\n coucou :%d\n", start);
+						if (start == -1)
+							start = ft_strchrintab(flags, '-', 'b');
+						if (start < 0)
+							start *= -1;
+						//printf("\n coucou :%d\n", start);
+						ft_before_data(start, 1, ' ', &cmp);
+					}
+					else
+					{
+						/*Ya pas de moin*/
+						ft_before_data(ft_atoi(flags), 1, ' ', &cmp);
+						decimal = va_arg(args, int);
+						ft_putchar_fd(decimal, 1);
+						cmp++;
+					}
+				}
+				start = -1;
+				end = -1;
+			}
+
+			else if (input[i] == 's')
 			{
 				/*SI YA DES FLAGS*/
 				if (ft_strlen(flags) > 0)
@@ -65,72 +109,84 @@ int ft_printf(const char *input, ...)
 						end = va_arg(args, int);
 						flags = ft_strreplace(flags, '*', ft_itoa(end));
 					}
+
 					str = va_arg(args, char *);
-
-					/*. peut avoir une data avant ou apres
-					DATA AVANT 10. Place 10 espace
-					DATA APRES .5 Affiche que les 5 premier char ou jusqu'a '\0'
-					if -10. Les espace seront placer apres le texte*/
-
-					/*SI YA PAS DE . donc selement une etoile qui a etait Remplacer precedament*/
-					if (ft_strchr(flags, '.') == 0)
+					if (str == 0)
 					{
+						str = ft_strdup("(null)");
 						if (ft_strchr(flags, '-') != 0)
 						{
 							start = ft_strchrintab(flags, '-', 's');
-							ft_putstr_fd(str, 1);
-							ft_before_data(start, ft_strlen(str), ' ', &cmp);
-							cmp += ft_strlen(str);
 						}
 						else
 						{
 							start = ft_atoi(flags);
-							ft_before_data(start, ft_strlen(str), ' ', &cmp);
-							cmp += ft_strlen(str);
-							ft_putstr_fd(str, 1);
 						}
+						printf("\nStart : %d\n End :%d \n", start, end);
 					}
 					else
 					{
-						end = ft_strchrintab(flags, '.', 'b');
-						if (ft_strchr(flags, '-') != 0)
+						/*SI YA PAS DE . donc selement une etoile qui a etait Remplacer precedament*/
+						if (ft_strchr(flags, '.') == 0)
 						{
-							/*SI YA UN - AU DEBUT*/
-							start = ft_strchrintab(flags, '-', '.');
-							if (start != -1)
+							if (ft_strchr(flags, '-') != 0)
 							{
-								ft_putnstr(str, end);
-								if (end != -1)
-									ft_before_data(start, end, ' ', &cmp);
-								else
-									ft_before_data(start, ft_strlen(str), ' ', &cmp);
-								if (ft_strlen(str) > (size_t)end)
-									cmp += end;
-								else
-									cmp += ft_strlen(str);
+								start = ft_strchrintab(flags, '-', 's');
+								ft_putstr_fd(str, 1);
+								ft_before_data(start, ft_strlen(str), ' ', &cmp);
 							}
+							else
+							{
+								start = ft_atoi(flags);
+								ft_before_data(start, ft_strlen(str), ' ', &cmp);
+								ft_putstr_fd(str, 1);
+							}
+							cmp += ft_strlen(str);
 						}
 						else
 						{
-							/*SI YA PAS DE -*/
-							start = ft_strchrintab(flags, 'a', '.');
-							if (start != -1)
+							end = ft_strchrintab(flags, '.', 'b');
+							if (ft_strchr(flags, '-') != 0)
 							{
+								/*SI YA UN - AU DEBUT*/
+								start = ft_strchrintab(flags, '-', '.');
+								if (start != -1)
+								{
+									ft_putnstr(str, end);
+									if (end != -1 && end <= (int)ft_strlen(str))
+										ft_before_data(start, end, ' ', &cmp);
+									else if (end > 0)
+										ft_before_data(start, ft_strlen(str), ' ', &cmp);
+									else
+										ft_before_data(start, 0, ' ', &cmp);
+									if (ft_strlen(str) > (size_t)end)
+										cmp += end;
+									else if (end > 0)
+										cmp += ft_strlen(str);
+								}
+							}
+							else
+							{
+								/*SI YA PAS DE -*/
+								start = ft_strchrintab(flags, 'a', '.');
+								if (start != -1)
+								{
+									if (end != -1 && end <= (int)ft_strlen(str))
+										ft_before_data(start, end, ' ', &cmp);
+									else if (end > 0)
+										ft_before_data(start, ft_strlen(str), ' ', &cmp);
+									else
+										ft_before_data(start, 0, ' ', &cmp);
+								}
 								if (end != -1)
-									ft_before_data(start, end, ' ', &cmp);
-								else if (end == -1 && start != -1)
-									ft_before_data(start, 0, ' ', &cmp);
-								else
-									ft_before_data(start, ft_strlen(str), ' ', &cmp);
+								{
+									if (ft_strlen(str) > (size_t)end)
+										cmp += end;
+									else
+										cmp += ft_strlen(str);
+								}
+								ft_putnstr(str, end);
 							}
-							if (end != -1)
-							{
-								if (ft_strlen(str) > (size_t)end)
-									cmp += end;
-								else
-									cmp += ft_strlen(str);
-							}
-							ft_putnstr(str, end);
 						}
 					}
 					start = -1;
@@ -139,30 +195,13 @@ int ft_printf(const char *input, ...)
 				else
 				{
 					str = va_arg(args, char *);
+					if (str == 0)
+						str = ft_strdup("(null)");
 					cmp += ft_strlen(str);
 					ft_putstr_fd(str, 1);
 				}
 			}
 /*
-			else if (input[i] == 'c' || input[i] == '%')
-			{
-				if (!ft_strncmp(flags, "*", 1))
-				{
-					start = va_arg(args, int);
-					if (input[i] != '%')
-						decimal = va_arg(args, int);
-					str = ft_calloc(sizeof(char), 2);
-					str = ft_memset(str, decimal, 1);
-					ft_before_data(start, str, ' ', &cmp);
-				}
-				else
-					decimal = va_arg(args, int);
-				if (input[i] != '%')
-					ft_putchar_fd(decimal, 1);
-				else
-					ft_putchar_fd('%', 1);
-				cmp++;
-			}
 
 			else if (input[i] == 'd' || input[i] == 'i')
 			{
