@@ -6,7 +6,7 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/15 21:05:26 by bledda           ###   ########.fr        #
+#    Updated: 2021/04/17 00:32:12 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ clean:
 			${LIBFT} clean
 
 fclean:		clean
+			rm $(NAME)
 			${LIBFT} fclean
 
 re:			fclean all
