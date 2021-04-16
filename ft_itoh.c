@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:01:58 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/13 12:11:40 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:15:20 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 char	*ft_itoh(unsigned long long nb)
 {
-	char				itoh[100];
+	char				*itoh;
 	int					i;
 	unsigned long long	save_nb;
 	char				*r;
 
 	i = 0;
+	itoh = ft_calloc(sizeof(char), 100);
 	while (nb != 0)
 	{
 		save_nb = nb % 16;
@@ -29,12 +30,8 @@ char	*ft_itoh(unsigned long long nb)
 			itoh[i++] = save_nb + 55;
 		nb /= 16;
 	}
-	itoh[i] = 0;
-	i = ft_strlen(itoh);
-	r = ft_calloc(sizeof(char), i + 1);
-	if (r == 0)
-		return (0);
-	ft_strlcpy(r, itoh, i + 1);
-	ft_strrev(r);
+	ft_strrev(itoh);
+	r = ft_strdup(itoh);
+	free(itoh);
 	return (r);
 }

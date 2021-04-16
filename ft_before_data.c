@@ -6,20 +6,20 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 13:20:56 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/14 01:07:35 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/15 21:04:43 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_before_data(int start, int size_str, char charset, unsigned int *cmp)
+void	ft_before_data(int start, int size, char charset, unsigned int *cmp)
 {
 	char	*tmp;
 
 	if (start >= 0)
 	{
 		tmp = ft_calloc(sizeof(char), start + 1);
-		start -= size_str;
+		start -= size;
 		if (start > 0)
 		{
 			tmp = ft_memset(tmp, charset, start);

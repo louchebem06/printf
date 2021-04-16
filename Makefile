@@ -6,7 +6,7 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/13 22:57:21 by bledda           ###   ########.fr        #
+#    Updated: 2021/04/15 21:05:26 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS	= ft_printf.c \
 			ft_isconvert.c \
 			ft_putnstr.c \
 			ft_strchrintab.c \
-			ft_strreplace.c
+			ft_strreplace.c \
+			ft_flagsjoin.c
 OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS  = -Wall -Wextra -Werror
@@ -40,7 +41,6 @@ clean:
 			${LIBFT} clean
 
 fclean:		clean
-			${RM} ${NAME} libft.a
 			${LIBFT} fclean
 
 re:			fclean all

@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 17:41:29 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/14 12:05:05 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/15 22:11:30 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strreplace(char *mainstr, char charset, char *replace)
 	char	*str;
 	int		i;
 	int		j;
-	char 	*tmp;
+	char	*tmp;
 
 	i = 0;
 	if (ft_strchr(mainstr, (int)charset) == 0)

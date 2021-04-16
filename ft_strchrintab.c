@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:01:17 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/14 01:21:00 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/15 21:08:21 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	ft_strchrintab(char *str, char a, char b)
 {
-	int value;
-	int i;
-	int ok;
+	int	value;
+	int	i;
+	int	ok;
+	int	symbole;
 
 	ok = -1;
 	value = 0;
 	i = 0;
+	symbole = 1;
 	if (a != 'a')
 	{
 		while (str[i] != a)
@@ -30,10 +32,13 @@ int	ft_strchrintab(char *str, char a, char b)
 	while (str[i] != b && str[i] != 0)
 	{
 		ok = 1;
-		value = (value * 10) + (str[i] - 48);
+		if (str[i] == '-')
+			symbole = -1;
+		if (ft_isdigit(str[i]))
+			value = (value * 10) + (str[i] - 48);
 		i++;
 	}
 	if (ok == -1)
 		return (-1);
-	return (value);
+	return (value * symbole);
 }
