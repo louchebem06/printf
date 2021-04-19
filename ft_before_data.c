@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 13:20:56 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/15 21:04:43 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/19 10:10:39 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_before_data(int start, int size, char charset, unsigned int *cmp)
 		{
 			tmp = ft_memset(tmp, charset, start);
 			ft_putstr_fd(tmp, 1);
-			*cmp += start;
+			if (cmp != 0)
+				*cmp += start;
 		}
 		free(tmp);
 		tmp = 0;

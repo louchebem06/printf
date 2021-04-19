@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 21:02:59 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/16 19:24:49 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/19 11:05:51 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ void	ft_flagsjoin(int *flags_value, va_list args, char *flags)
 	if (flags_value[1] < 0 && flags_value[1] != -1)
 			flags_value[1] *= -1;
 	/********************************/
-	if (tmp[0] == '0')
+	if (tmp[0] == '0' && tmp[1] == '-')
+		flags_value[0] = 3;
+	else if (tmp[0] == '0')
 		flags_value[0] = 2;
+	/********************************/
 	free(tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/15 21:04:24 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/19 15:01:25 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ char	*ft_strreplace(char *mainstr, char charset, char *replace);
 int		ft_strchrintab(char *str, char a, char b);
 void	ft_putnstr(char *str, int n);
 void	ft_flagsjoin(int *flags_value, va_list args, char *flags);
+char	*ft_uitoa(unsigned int n);
 
 #endif
