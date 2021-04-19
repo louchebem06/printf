@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/19 19:39:02 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/19 23:33:38 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ int ft_printf(const char *input, ...)
 		if (input[i] == '%')
 		{
 			i++;
-			ft_memset(flags, 0, ft_strlen(flags));
-			while (ft_isconvert(input[i]))
-				flags[f++] = input[i++];
-			f = 0;
+			ft_flags(flags, (char *)input, &i);
 			ft_flagsjoin(flags_value, args, flags);
-			//printf("\nResultat final  : %d %d %d\n", flags_value[0], flags_value[1], flags_value[2]);
-			//break;
+
+			/*
+				GESTION DE C ET DU %
+			*/
 			if (input[i] == 'c' || input[i] == '%')
 			{
 				if (input[i] == 'c')
@@ -76,7 +75,10 @@ int ft_printf(const char *input, ...)
 				cmp++;
 			}
 
-			else if (input[i] == 's')
+			/*
+				GESTION DES STRING
+			*/
+			if (input[i] == 's')
 			{
 				str = va_arg(args, char *);
 				if (str == 0)
@@ -123,6 +125,9 @@ int ft_printf(const char *input, ...)
 					free(str);
 			}
 
+			/*
+				GESTION DES POINTER
+			*/
 			else if (input[i] == 'p')
 			{
 				decimal = va_arg(args, unsigned long long);
@@ -175,6 +180,9 @@ int ft_printf(const char *input, ...)
 				free(str);
 			}
 
+			/*
+				GESTION DE DIUXX
+			*/
 			else if (input[i] == 'd' || input[i] == 'i' || input[i] == 'u' || input[i] == 'x' || input[i] == 'X')
 			{
 				if (input[i] == 'd' || input[i] == 'i')
@@ -190,21 +198,11 @@ int ft_printf(const char *input, ...)
 				else if (input[i] == 'u')
 				{
 					decimal = va_arg(args, unsigned int);
-					/*if ((unsigned int)decimal < 0)
-					{
-						neg = 1;
-						decimal *= -1;
-					}*/
 					str = ft_uitoa(decimal);
 				}
 				else if (input[i] == 'x' || input[i] == 'X')
 				{
 					decimal = va_arg(args, unsigned int);
-					/*if ((unsigned long long)decimal < 0)
-					{
-						neg = 1;
-						decimal *= -1;
-					}*/
 					if (decimal == 0)
 						str = ft_strdup("0");
 					else
@@ -215,21 +213,16 @@ int ft_printf(const char *input, ...)
 						str = ft_strtoupper(str);
 				}
 				
-				//printf("%d", (int)decimal);
-				//ft_putstr_fd(str, 1);
-				//str = ft_itoa(decimal);
-				// Pas de Flags
+				/*
+					PAS DE FLAGS
+				*/
 				if (flags_value[2] == -1 && flags_value[1] == -1)
 				{
-					//printf("HERE");
-					/*if (input[i] == 'x' || input[i] == 'X')
+					if (neg == 1)
 					{
-						if (str == 0)
-						{
-							ft_putchar_fd('0', 1);
-							cmp++;
-						}
-					}*/
+						ft_putchar_fd('-', 1);
+						cmp++;
+					}
 					ft_putstr_fd(str, 1);
 					cmp += ft_strlen(str);
 				}
@@ -237,56 +230,41 @@ int ft_printf(const char *input, ...)
 				{
 					if (!(flags_value[1] == 0) || !(flags_value[2] == 0))
 					{
-						//Si ya un moin
+						/*
+							YA UN MOIN
+						*/
 						if (flags_value[0] == 0)
 						{
-							//printf("HERE");
 							if (neg == 1)
 							{
 								ft_putchar_fd('-', 1);
 								cmp++;
 								f++;
 							}
-							// 1 Param
 							if (flags_value[1] == -1)
 							{
-								// 2 Param
-								// if str et plus grand que param 1 et 2 affiche str
-								// if str et plus petit que param 2 ajouter zero avant
-								// si le plus grand de param 2 ou str et plus petit que param 1
-								//alors mettre de espace pour completer
-								//printf("HERE");
-
-								/*f = ft_strlen(str);
-								ft_putstr_fd(str, 1);
-								if ((int)f < flags_value[2])
-									ft_before_data(flags_value[2], f, ' ', &cmp);*/
-
 								if ((input[i] == 'X' || input[i] == 'x') && str[0] == 0)
 								{
 									f = 1;
 									ft_putstr_fd("0", 1);
 									if ((int)f < flags_value[2])
 										ft_before_data(flags_value[2], f, ' ', &cmp);
-									
 								}
 								else
 								{
 									f = ft_strlen(str);
 									ft_putstr_fd(str, 1);
 									if ((int)f < flags_value[2])
-										ft_before_data(flags_value[2], f, ' ', &cmp);
-									//ft_putstr_fd(str, 1);
+									{
+										if (neg == 0)
+											ft_before_data(flags_value[2], f, ' ', &cmp);
+										else if (neg == 1)
+											ft_before_data(flags_value[2], f + 1, ' ', &cmp);
+									}
 								}
-								//ft_putstr_fd(str, 1);
 							}
 							else
 							{
-								// 2 Param
-								// if str et plus grand que param 1 et 2 affiche str
-								// if str et plus petit que param 2 ajouter zero avant
-								// si le plus grand de param 2 ou str et plus petit que param 1
-								//alors mettre de espace pour completer
 								if ((int)ft_strlen(str) >= flags_value[1] && (int)ft_strlen(str) >= flags_value[2])
 								{
 									ft_putstr_fd(str, 1);
@@ -309,30 +287,29 @@ int ft_printf(const char *input, ...)
 										ft_before_data(flags_value[1], f, ' ', &cmp);
 									else if ((int)f < flags_value[1] && neg == 1)
 										ft_before_data(flags_value[1], f + 1, ' ', &cmp);
-									//f--;
 								}
 							}
 						}
-						//Si ya un rien
+
+						/*
+							PAS DE SYMBOLE
+						*/
 						else if (flags_value[0] == 1)
 						{
-							//printf("HERE");
-							// 1 Param
 							if (flags_value[1] == -1)
 							{
 								if ((int)ft_strlen(str) >= flags_value[2])
 								{
-									//printf("HERE");
+									if (neg == 1)
+									{
+										ft_putchar_fd('-', 1);
+										cmp++;
+									}
 									ft_putstr_fd(str, 1);
 									f = ft_strlen(str);
 								}
 								else
 								{
-									//printf("HERE");
-									//ft_putstr_fd(str, 1);
-									/*if ((int)ft_strlen(str) < flags_value[2])
-										f = flags_value[2];
-									else*/
 									if ((input[i] == 'X' || input[i] == 'x') && str[0] == 0)
 									{
 										f = 1;
@@ -344,65 +321,37 @@ int ft_printf(const char *input, ...)
 									{
 										f = ft_strlen(str);
 										if ((int)f < flags_value[2])
-											ft_before_data(flags_value[2], f, ' ', &cmp);
+										{
+											if (neg == 1)
+												ft_before_data(flags_value[2], f + 1, ' ', &cmp);
+											else
+												ft_before_data(flags_value[2], f, ' ', &cmp);
+										}
+										if (neg == 1)
+										{
+											ft_putchar_fd('-', 1);
+											cmp++;
+										}
 										ft_putstr_fd(str, 1);
 									}
-									//f--;
 								}
 							}
 							else
 							{
-								//printf("HERE");
-								// 2 Param
-								// if str et plus grand que param 1 et 2 affiche str
-								// if str et plus petit que param 2 ajouter zero avant
-								// si le plus grand de param 2 ou str et plus petit que param 1
-								//alors mettre de espace pour completer
 								if (neg == 1)
 								{
-									//ft_putchar_fd('-', 1);
 									cmp++;
 									f++;
 								}
 								if ((int)ft_strlen(str) > flags_value[1] && (int)ft_strlen(str) > flags_value[2])
 								{
+									if (neg == 1)
+										ft_putchar_fd('-', 1);
 									ft_putstr_fd(str, 1);
 									f = ft_strlen(str);
 								}
 								else
 								{
-									//printf("HERE");
-									/*if (input[i] == 'u' && ft_strncmp(str, "4294967295", 10) == 0
-										&& flags_value[2] < 11 && flags_value[1] > 10)
-									{
-										//printf("HERE");
-										ft_putchar_fd(' ', 1);
-										cmp++;
-									}*/
-									/*if (input[i] == 'x'
-										&& ft_strncmp(str, "ffffffff", 8) == 0
-										&& flags_value[2] < flags_value[1])
-									{
-										//printf("HERE");
-										ft_putchar_fd(' ', 1);
-										cmp++;
-									}
-
-									if (input[i] == 'X'
-										&& ft_strncmp(str, "FFFFFFFF", 8) == 0
-										&& flags_value[2] < flags_value[1])
-									{
-										//printf("HERE");
-										ft_putchar_fd(' ', 1);
-										cmp++;
-									}*/
-									
-									/*if ((input[i] == 'x' || input[i] == 'X') && str[0] == 0 && flags_value[2] == 0)
-									{
-										ft_putchar_fd(' ', 1);
-										cmp++;
-									}*/
-
 									if ((int)ft_strlen(str) <= flags_value[2])
 									{
 										f = flags_value[2];
@@ -437,20 +386,18 @@ int ft_printf(const char *input, ...)
 									}
 									else
 									{
-										//printf("HERE");
-										//ft_putchar_fd(' ', 1);
 										ft_before_data(flags_value[1], 0, ' ', &cmp);
 										cmp--;
 									}
-									//f--;
 								}
 							}	
 						}
-						//Si ya un zero
+
+						/*
+							SI YA UN ZERO
+						*/
 						else if (flags_value[0] == 2)
 						{
-							//printf("HERE 1");
-							// 1 Param
 							if (flags_value[1] == -1)
 							{
 								if (neg == 1)
@@ -458,15 +405,9 @@ int ft_printf(const char *input, ...)
 									f++;
 									cmp++;
 								}
-								/*f = ft_strlen(str);*/
 								if (neg == 1)
 									ft_putchar_fd('-', 1);
-								/*if ((int)f < flags_value[2])
-									ft_before_data(flags_value[2], f + 1, '0', &cmp);
-								ft_putstr_fd(str, 1);*/
-
 								f = ft_strlen(str);
-								//ft_putstr_fd(str, 1);
 								if ((int)f < flags_value[2] && neg == 0)
 									ft_before_data(flags_value[2], f, '0', &cmp);
 								else if ((int)f < flags_value[2] && neg == 1)
@@ -475,7 +416,6 @@ int ft_printf(const char *input, ...)
 							}
 							else
 							{
-								//printf("HERE 1");
 								if ((int)ft_strlen(str) >= flags_value[1] && (int)ft_strlen(str) >= flags_value[2])
 								{
 									if (neg == 1)
@@ -489,8 +429,6 @@ int ft_printf(const char *input, ...)
 								}
 								else
 								{
-									//printf("HERE 1");
-									//printf("%s\n", str);
 									if (neg == 1)
 									{
 										f++;
@@ -519,15 +457,15 @@ int ft_printf(const char *input, ...)
 										ft_putstr_fd(str, 1);
 									else
 										ft_putchar_fd(' ', 1);
-									
-									}
+								}
 							}
 						}
-						//Si ya un zero et un moin -
+
+						/*
+							ZERO + MOIN
+						*/
 						else if (flags_value[0] == 3)
 						{
-							//printf("HERE");
-							// 1 Param
 							if (flags_value[1] == -1)
 							{
 								if (neg == 1)
@@ -546,8 +484,6 @@ int ft_printf(const char *input, ...)
 							}
 							else
 							{
-								//printf("HERE 2");
-								//printf("%s", str);
 								if (neg == 1)
 								{
 									f++;
@@ -576,22 +512,26 @@ int ft_printf(const char *input, ...)
 									ft_before_data(flags_value[1], f + 1, ' ', &cmp);
 								if ((int)f < flags_value[1] && neg !=  1)
 									ft_before_data(flags_value[1], f, ' ', &cmp);
-								
-								
-								//f--;
 							}
 						}
 						cmp += f;
 					}
 					else
 					{
-						//printf("HERE");
-						if (/*(ft_strncmp(str, "0", 1) != 0 && input[i] != 'x')
-							&& (*/ft_strncmp(str, "0", 1) != 0 /*&& input[i] != 'X')*/)
+						if (ft_strncmp(str, "0", 1) != 0)
 						{
+							if (neg == 1)
+							{
+								ft_putchar_fd('-', 1);
+								cmp++;
+							}
 							ft_putstr_fd(str, 1);
 							cmp += ft_strlen(str);
-							//printf("HERE");
+						}
+						if (ft_strncmp(str, "0", 1) == 0 && flags[1] == '1')
+						{
+							ft_putchar_fd(' ', 1);
+							cmp++;
 						}
 					}
 				}
