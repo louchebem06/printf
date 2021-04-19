@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/19 18:10:39 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/19 19:39:02 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int ft_printf(const char *input, ...)
 			//break;
 			if (input[i] == 'c' || input[i] == '%')
 			{
-				decimal = va_arg(args, int);
+				if (input[i] == 'c')
+					decimal = va_arg(args, int);
 				if (flags_value[2] == -1)
 				{
 					if (input[i] != '%')
@@ -204,7 +205,10 @@ int ft_printf(const char *input, ...)
 						neg = 1;
 						decimal *= -1;
 					}*/
-					str = ft_itoh(decimal);
+					if (decimal == 0)
+						str = ft_strdup("0");
+					else
+						str = ft_itoh(decimal);
 					if (input[i] == 'x')
 						str = ft_strtolower(str);
 					else
@@ -217,14 +221,15 @@ int ft_printf(const char *input, ...)
 				// Pas de Flags
 				if (flags_value[2] == -1 && flags_value[1] == -1)
 				{
-					if (input[i] == 'x' || input[i] == 'X')
+					//printf("HERE");
+					/*if (input[i] == 'x' || input[i] == 'X')
 					{
-						if (str[i] == 0)
+						if (str == 0)
 						{
 							ft_putchar_fd('0', 1);
 							cmp++;
 						}
-					}
+					}*/
 					ft_putstr_fd(str, 1);
 					cmp += ft_strlen(str);
 				}
@@ -367,14 +372,14 @@ int ft_printf(const char *input, ...)
 								else
 								{
 									//printf("HERE");
-									if (input[i] == 'u' && ft_strncmp(str, "4294967295", 10) == 0
+									/*if (input[i] == 'u' && ft_strncmp(str, "4294967295", 10) == 0
 										&& flags_value[2] < 11 && flags_value[1] > 10)
 									{
 										//printf("HERE");
 										ft_putchar_fd(' ', 1);
 										cmp++;
-									}
-									if (input[i] == 'x'
+									}*/
+									/*if (input[i] == 'x'
 										&& ft_strncmp(str, "ffffffff", 8) == 0
 										&& flags_value[2] < flags_value[1])
 									{
@@ -390,13 +395,13 @@ int ft_printf(const char *input, ...)
 										//printf("HERE");
 										ft_putchar_fd(' ', 1);
 										cmp++;
-									}
+									}*/
 									
-									if ((input[i] == 'x' || input[i] == 'X') && str[0] == 0 && flags_value[2] == 0)
+									/*if ((input[i] == 'x' || input[i] == 'X') && str[0] == 0 && flags_value[2] == 0)
 									{
 										ft_putchar_fd(' ', 1);
 										cmp++;
-									}
+									}*/
 
 									if ((int)ft_strlen(str) <= flags_value[2])
 									{
@@ -406,10 +411,18 @@ int ft_printf(const char *input, ...)
 									{
 										f = ft_strlen(str);
 									}
-									if ((int)f < flags_value[1] && ft_strncmp(str, "0", 1) != 0)
+
+
+									if ((int)f < flags_value[1] && ft_strncmp(str, "0", 1) != 0 && ft_strncmp(str, "1", 1) == 0)
 									{
 										ft_before_data(flags_value[1], f + 1, ' ', &cmp);
 									}
+									else if ((int)f < flags_value[1] && ft_strncmp(str, "0", 1) != 0)
+									{
+										ft_before_data(flags_value[1], f, ' ', &cmp);
+									}
+
+
 									if (neg == 1)
 										ft_putchar_fd('-', 1);
 
