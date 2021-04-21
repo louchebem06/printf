@@ -6,7 +6,7 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/21 11:11:41 by bledda           ###   ########.fr        #
+#    Updated: 2021/04/21 19:38:19 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,12 @@ SRCS	= ft_printf.c \
 			ft_check_percent.c \
 			ft_check_c.c \
 			ft_check_s.c \
-			ft_check_p.c
+			ft_check_p.c \
+			ft_check_di.c \
+			ft_check_u.c \
+			ft_check_xX.c \
+			ft_flags_di_utils.c \
+			ft_flags_di_utils2.c
 OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS  = -Wall -Wextra -Werror
@@ -56,4 +61,4 @@ libft:
 			${LIBFT} bonus
 			cp libft/libft.a $(NAME)
 
-.PHONY: $(NAME) all clean fclean re libft
+.PHONY:		$(NAME) all clean fclean re libft

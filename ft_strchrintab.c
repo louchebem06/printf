@@ -6,11 +6,19 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:01:17 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/20 10:46:51 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/21 13:31:55 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_define_value(int *ok, int *value, int *i, int *symbole)
+{
+	*ok = -1;
+	*value = 0;
+	*i = 0;
+	*symbole = 1;
+}
 
 int	ft_strchrintab(char *str, char a, char b)
 {
@@ -19,10 +27,7 @@ int	ft_strchrintab(char *str, char a, char b)
 	int	ok;
 	int	symbole;
 
-	ok = -1;
-	value = 0;
-	i = 0;
-	symbole = 1;
+	ft_define_value(&ok, &value, &i, &symbole);
 	if (a != 'a')
 	{
 		while (str[i] != a)

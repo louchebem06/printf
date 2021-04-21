@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 14:30:16 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/19 14:39:40 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/21 12:46:30 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ static int	nb_char(unsigned int n)
 
 char	*ft_uitoa(unsigned int n)
 {
-	char	*itoa;
-	unsigned int		i;
-	int		symbole;
+	char			*itoa;
+	unsigned int	i;
+	int				symbole;
 
 	symbole = 0;
-	/*if (n == 4294967295)
-		return (ft_strdup("4294967295"));*/
 	if (n < 0)
 	{
 		n = -n;

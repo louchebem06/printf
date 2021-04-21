@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/21 11:11:55 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/21 19:45:14 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,18 @@ void	ft_check_c(char input, va_list args, int *flags, unsigned int *cmp);
 void	ft_check_percent(char input, int *flags_value, unsigned int *cmp);
 void	ft_check_s(char input, va_list args, int *flags, unsigned int *cmp);
 void	ft_check_p(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_check_di(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_check_u(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_check_xX(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_flags_di_minus(unsigned int *cmp, int *flags, int neg, char *str);
+void	ft_flags_di_clear(unsigned int *cmp, int *flags, int neg, char *str);
+void	ft_flags_di_zero(unsigned int *cmp, int *flags, int neg, char *str);
+void	ft_flags_di_zero_minu(unsigned int *cmp, int *flags, int neg, char *str);
+int		ft_isneg_di(int neg, unsigned int *cmp);
+void	ft_just_print(int neg, unsigned int *cmp, char *str);
+void	ft_space_neg(size_t f, int flags, int neg, unsigned int *cmp);
+void	ft_zero_neg(size_t f, int flags, int neg, unsigned int *cmp);
+void	ft_print_and_f_size(size_t *f, char *str);
+void	ft_flags_di(int *flags, unsigned int *cmp2, int neg, char *str);
 
 #endif

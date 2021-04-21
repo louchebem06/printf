@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:01:47 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/21 12:36:13 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/21 14:06:42 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ unsigned int	ft_check(char input, va_list args, int *flags, unsigned int cmp)
 	ft_check_percent(input, flags, &cmp);
 	ft_check_s(input, args, flags, &cmp);
 	ft_check_p(input, args, flags, &cmp);
+	ft_check_di(input, args, flags, &cmp);
+	ft_check_u(input, args, flags, &cmp);
+	ft_check_xX(input, args, flags, &cmp);
 	return (cmp);
 }
 
