@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_before_data.c                                   :+:      :+:    :+:   */
+/*   ft_check_percent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 13:20:56 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/20 16:10:44 by bledda           ###   ########.fr       */
+/*   Created: 2021/04/20 16:18:58 by bledda            #+#    #+#             */
+/*   Updated: 2021/04/20 16:22:30 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_before_data(int start, int size, char charset, unsigned int *cmp)
+void	ft_check_percent(char input, int *flags_value, unsigned int *cmp)
 {
-	char	*tmp;
+	unsigned int	cmp2;
 
-	if (start >= 0)
+	cmp2 = 0;
+	if (input == '%')
 	{
-		tmp = ft_calloc(sizeof(char), start + 1);
-		start -= size;
-		if (start > 0)
+		if (flags_value[2] == -1)
+			ft_putchar_fd('%', 1);
+		else
 		{
-			tmp = ft_memset(tmp, charset, start);
-			ft_putstr_fd(tmp, 1);
-			if (cmp != 0)
-				*cmp += start;
+			if (flags_value[0] == 0)
+			{
+				ft_putchar_fd('%', 1);
+				ft_before_data(flags_value[2], 1, ' ', &cmp2);
+			}
+			else
+			{	
+				ft_before_data(flags_value[2], 1, ' ', &cmp2);
+				ft_putchar_fd('%', 1);
+			}
 		}
-		free(tmp);
-		tmp = 0;
+		*cmp += cmp2 + 1;
 	}
 }

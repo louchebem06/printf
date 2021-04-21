@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/19 20:56:54 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/21 11:11:55 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,9 @@ void	ft_putnstr(char *str, int n);
 void	ft_flagsjoin(int *flags_value, va_list args, char *flags);
 char	*ft_uitoa(unsigned int n);
 void	ft_flags(char *flags, char *input, int *a);
+void	ft_check_c(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_check_percent(char input, int *flags_value, unsigned int *cmp);
+void	ft_check_s(char input, va_list args, int *flags, unsigned int *cmp);
+void	ft_check_p(char input, va_list args, int *flags, unsigned int *cmp);
 
 #endif

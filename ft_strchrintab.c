@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:01:17 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/19 22:56:01 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/20 10:46:51 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int	ft_strchrintab(char *str, char a, char b)
 		i++;
 	}
 	if (ok == -1)
-		return (-1);
+		return (0);
 	return (value * symbole);
 }
