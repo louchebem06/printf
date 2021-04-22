@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 11:00:05 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/21 19:45:14 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/22 16:53:16 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ void	ft_check_xX(char input, va_list args, int *flags, unsigned int *cmp);
 void	ft_flags_di_minus(unsigned int *cmp, int *flags, int neg, char *str);
 void	ft_flags_di_clear(unsigned int *cmp, int *flags, int neg, char *str);
 void	ft_flags_di_zero(unsigned int *cmp, int *flags, int neg, char *str);
-void	ft_flags_di_zero_minu(unsigned int *cmp, int *flags, int neg, char *str);
+void	ft_flags_di_zero_min(unsigned int *cmp, int *flags, int neg, char *str);
 int		ft_isneg_di(int neg, unsigned int *cmp);
 void	ft_just_print(int neg, unsigned int *cmp, char *str);
 void	ft_space_neg(size_t f, int flags, int neg, unsigned int *cmp);
 void	ft_zero_neg(size_t f, int flags, int neg, unsigned int *cmp);
 void	ft_print_and_f_size(size_t *f, char *str);
 void	ft_flags_di(int *flags, unsigned int *cmp2, int neg, char *str);
+void	ft_f_size(size_t *f, int flags, char *str);
+int		ft_str_is_zero(char *str);
+void	ft_print_zero_str_and_f_size(int flags, size_t *f, char *str);
+void	ft_print_zero_str(int neg, unsigned int *cmp, int flags, char *str);
+int		ft_print_space_str(int neg, unsigned int *cmp, int flags, char *str);
+void	ft_print_zero_if(int *flags, char *str, size_t f, unsigned int *cmp);
+void	ft_prt_zer_str_spc(int *flags, char *str, size_t *f, unsigned int *cmp);
+void	ft_zero_or_str(size_t *f, char *str, int *flags);
 
 #endif

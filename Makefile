@@ -6,7 +6,7 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/21 19:38:19 by bledda           ###   ########.fr        #
+#    Updated: 2021/04/22 15:58:46 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS	= ft_printf.c \
 			ft_check_u.c \
 			ft_check_xX.c \
 			ft_flags_di_utils.c \
-			ft_flags_di_utils2.c
+			ft_flags_di_utils2.c \
+			ft_flags_di_utils3.c \
+			ft_flags_di_utils4.c
 OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS  = -Wall -Wextra -Werror

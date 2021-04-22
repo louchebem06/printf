@@ -6,7 +6,7 @@
 /*   By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:35:37 by bledda            #+#    #+#             */
-/*   Updated: 2021/04/21 19:41:33 by bledda           ###   ########.fr       */
+/*   Updated: 2021/04/22 13:01:41 by bledda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_just_print(int neg, unsigned int *cmp, char *str)
 {
 	ft_isneg_di(neg, cmp);
 	ft_putstr_fd(str, 1);
-	cmp += ft_strlen(str);
+	*cmp += ft_strlen(str);
 }
 
 void	ft_space_neg(size_t f, int flags, int neg, unsigned int *cmp)
