@@ -6,12 +6,17 @@
 #    By: bledda <bledda@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 22:32:25 by bledda            #+#    #+#              #
-#    Updated: 2021/04/22 15:58:46 by bledda           ###   ########.fr        #
+#    Updated: 2021/06/05 15:49:31 by bledda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= libftprintf.a
-SRCS	= ft_printf.c \
+NAME		= libftprintf.a
+
+HEADER_FILE = header/ft_printf.h
+
+FOLDER		= src/
+
+SRCS		= ft_printf.c \
 			ft_itoh.c \
 			ft_strrev.c \
 			ft_strtolower.c \
@@ -35,19 +40,25 @@ SRCS	= ft_printf.c \
 			ft_flags_di_utils2.c \
 			ft_flags_di_utils3.c \
 			ft_flags_di_utils4.c
-OBJS	= ${SRCS:.c=.o}
-CC		= gcc
-CFLAGS  = -Wall -Wextra -Werror
-RM		= rm -f
-LIBFT	= cd libft/ && make
+
+SRC			= $(addprefix ${FOLDER},${SRCS})
+
+OBJS		= ${SRC:.c=.o}
+
+LIBFT		= cd libft/ && make
+
+CC			= gcc
+CFLAGS  	= -Wall -Wextra -Werror
+RM			= rm -f
+AR			= ar -rcs
 
 $(NAME):	libft ${OBJS}
-			ar -rcs ${NAME} ${OBJS}
-
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			${AR} ${NAME} ${OBJS}
 
 all:		${NAME}
+
+%.o: %.c	$(HEADER_FILE)
+			$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
 			${RM} ${OBJS}
@@ -63,4 +74,4 @@ libft:
 			${LIBFT} bonus
 			cp libft/libft.a $(NAME)
 
-.PHONY:		$(NAME) all clean fclean re libft
+.PHONY:		all clean fclean re libft
